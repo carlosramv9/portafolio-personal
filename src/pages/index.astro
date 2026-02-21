@@ -1,11 +1,29 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Skills from '../components/Skills.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { translations, personalInfo } from '../data/portfolio';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const currentLang = 'es';
+const title = `${personalInfo.name} - ${personalInfo.title[currentLang]}`;
+const description = 'Desarrollador Full-Stack especializado en .NET y React/Next.js. Construcción de ERPs, portales operativos y soluciones mobile con enfoque en procesos de negocio.';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={title} description={description} lang={currentLang}>
+  <Navbar currentLang={currentLang} translations={translations} />
+  <main>
+    <Hero currentLang={currentLang} translations={translations} />
+    <About currentLang={currentLang} translations={translations} />
+    <Experience currentLang={currentLang} translations={translations} />
+    <Projects currentLang={currentLang} translations={translations} />
+    <Skills currentLang={currentLang} translations={translations} />
+    <Contact currentLang={currentLang} translations={translations} />
+  </main>
+  <Footer currentLang={currentLang} translations={translations} />
 </Layout>

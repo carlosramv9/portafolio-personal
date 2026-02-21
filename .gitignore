@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Windows reserved device name (evita error "invalid path 'nul'")
+nul

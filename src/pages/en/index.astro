@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import Experience from '../../components/Experience.astro';
+import Projects from '../../components/Projects.astro';
+import Skills from '../../components/Skills.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+import { translations, personalInfo } from '../../data/portfolio';
+
+const currentLang = 'en';
+const title = `${personalInfo.name} - ${personalInfo.title[currentLang]}`;
+const description = 'Full-Stack Developer specialized in .NET and React/Next.js. Building ERPs, operational portals, and mobile solutions with a focus on business processes.';
+---
+
+<Layout title={title} description={description} lang={currentLang}>
+  <Navbar currentLang={currentLang} translations={translations} />
+  <main>
+    <Hero currentLang={currentLang} translations={translations} />
+    <About currentLang={currentLang} translations={translations} />
+    <Experience currentLang={currentLang} translations={translations} />
+    <Projects currentLang={currentLang} translations={translations} />
+    <Skills currentLang={currentLang} translations={translations} />
+    <Contact currentLang={currentLang} translations={translations} />
+  </main>
+  <Footer currentLang={currentLang} translations={translations} />
+</Layout>

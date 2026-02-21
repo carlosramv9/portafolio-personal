@@ -1,7 +1,7 @@
 {
-  "name": "",
+  "name": "carlos-ramirez-portfolio",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,6 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.2.0",
     "astro": "^5.17.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "tailwindcss": "^4.2.0"
   }
 }

@@ -1,0 +1,154 @@
+---
+import type { Language } from '../data/portfolio';
+
+interface Props {
+  currentLang: Language;
+  translations: any;
+}
+
+const { currentLang, translations } = Astro.props;
+const t = translations[currentLang];
+---
+
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo/Name -->
+      <a href="#home" class="text-xl font-bold text-white hover:text-blue-400 transition-colors">
+        CR
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#home" class="nav-link text-slate-300 hover:text-white transition-colors">{t.nav.home}</a>
+        <a href="#about" class="nav-link text-slate-300 hover:text-white transition-colors">{t.nav.about}</a>
+        <a href="#experience" class="nav-link text-slate-300 hover:text-white transition-colors">{t.nav.experience}</a>
+        <a href="#projects" class="nav-link text-slate-300 hover:text-white transition-colors">{t.nav.projects}</a>
+        <a href="#skills" class="nav-link text-slate-300 hover:text-white transition-colors">{t.nav.skills}</a>
+        <a href="#contact" class="nav-link text-slate-300 hover:text-white transition-colors">{t.nav.contact}</a>
+
+        <!-- Language Switcher -->
+        <div class="flex items-center gap-2 ml-4">
+          <button
+            class="lang-btn px-2 py-1 text-sm rounded transition-colors"
+            data-lang="es"
+            class:list={[currentLang === 'es' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white']}
+          >
+            ES
+          </button>
+          <button
+            class="lang-btn px-2 py-1 text-sm rounded transition-colors"
+            data-lang="en"
+            class:list={[currentLang === 'en' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white']}
+          >
+            EN
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="md:hidden text-white p-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <div class="flex flex-col space-y-3">
+        <a href="#home" class="nav-link text-slate-300 hover:text-white transition-colors">{t.nav.home}</a>
+        <a href="#about" class="nav-link text-slate-300 hover:text-white transition-colors">{t.nav.about}</a>
+        <a href="#experience" class="nav-link text-slate-300 hover:text-white transition-colors">{t.nav.experience}</a>
+        <a href="#projects" class="nav-link text-slate-300 hover:text-white transition-colors">{t.nav.projects}</a>
+        <a href="#skills" class="nav-link text-slate-300 hover:text-white transition-colors">{t.nav.skills}</a>
+        <a href="#contact" class="nav-link text-slate-300 hover:text-white transition-colors">{t.nav.contact}</a>
+
+        <div class="flex items-center gap-2 pt-2">
+          <button
+            class="lang-btn px-3 py-1.5 text-sm rounded transition-colors"
+            data-lang="es"
+            class:list={[currentLang === 'es' ? 'bg-blue-600 text-white' : 'text-slate-400']}
+          >
+            ES
+          </button>
+          <button
+            class="lang-btn px-3 py-1.5 text-sm rounded transition-colors"
+            data-lang="en"
+            class:list={[currentLang === 'en' ? 'bg-blue-600 text-white' : 'text-slate-400']}
+          >
+            EN
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Close mobile menu when clicking a link
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
+  });
+
+  // Language switcher
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const lang = target.dataset.lang;
+      if (lang) {
+        window.location.href = `/${lang === 'en' ? 'en' : ''}`;
+      }
+    });
+  });
+
+  // Navbar scroll effect
+  let lastScroll = 0;
+  const navbar = document.getElementById('navbar');
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll <= 0) {
+      navbar?.classList.remove('shadow-lg');
+    } else {
+      navbar?.classList.add('shadow-lg');
+    }
+
+    lastScroll = currentScroll;
+  });
+
+  // Active link highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+
+    sections.forEach((section) => {
+      const sectionTop = (section as HTMLElement).offsetTop;
+      const sectionHeight = (section as HTMLElement).clientHeight;
+
+      if (window.pageYOffset >= sectionTop - 200) {
+        current = section.getAttribute('id') || '';
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.remove('text-blue-400');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('text-blue-400');
+      }
+    });
+  });
+</script>

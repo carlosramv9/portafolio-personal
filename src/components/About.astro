@@ -1,0 +1,57 @@
+---
+import type { Language } from '../data/portfolio';
+import { strengths } from '../data/portfolio';
+
+interface Props {
+  currentLang: Language;
+  translations: any;
+}
+
+const { currentLang, translations } = Astro.props;
+const t = translations[currentLang];
+---
+
+<section id="about" class="py-20 bg-slate-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Title -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-white mb-4">{t.about.title}</h2>
+      <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="grid lg:grid-cols-2 gap-12 mb-16">
+      <!-- Left: Description -->
+      <div class="space-y-6">
+        <p class="text-lg text-slate-300 leading-relaxed">
+          {t.about.description}
+        </p>
+        <p class="text-lg text-slate-300 leading-relaxed">
+          {t.about.focus}
+        </p>
+      </div>
+
+      <!-- Right: Services -->
+      <div class="bg-slate-800/50 rounded-lg p-6 border border-slate-700">
+        <h3 class="text-xl font-semibold text-white mb-4">{t.about.servicesTitle}</h3>
+        <p class="text-slate-300 leading-relaxed">
+          {t.about.services}
+        </p>
+      </div>
+    </div>
+
+    <!-- Strengths -->
+    <div>
+      <h3 class="text-2xl font-bold text-white mb-8 text-center">{t.about.strengthsTitle}</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        {strengths.map((strength) => (
+          <div class="bg-slate-800/50 rounded-lg p-6 border border-slate-700 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105">
+            {/* <div class="text-4xl mb-4">{strength.icon}</div> */}
+            <h4 class="text-xl font-semibold text-white mb-3">{strength.title[currentLang]}</h4>
+            <p class="text-slate-300 leading-relaxed">{strength.description[currentLang]}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
