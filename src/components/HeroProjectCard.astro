@@ -1,0 +1,132 @@
+---
+import type { Language } from '../data/portfolio';
+
+interface Props {
+  project: any;
+  currentLang: Language;
+  translations: any;
+}
+
+const { project, currentLang, translations } = Astro.props;
+const t = translations[currentLang];
+---
+
+<article class="group relative flex flex-col lg:flex-row bg-[#0a0f1a] rounded-[2rem] border border-slate-800/80 overflow-hidden mb-16 transition-all duration-500 hover:border-slate-700 hover:shadow-2xl hover:shadow-blue-900/10">
+  
+  <!-- Contenedor Visual (Izquierda) -->
+  <div class="relative lg:w-5/12 h-64 lg:h-auto bg-slate-950 overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-800/50 flex-shrink-0">
+    {project.image ? (
+      <>
+        <img 
+          src={project.image} 
+          alt={project.name[currentLang]} 
+          class="w-full h-full object-cover object-left-top transition-transform duration-1000 group-hover:scale-105 opacity-85 group-hover:opacity-100" 
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#0a0f1a] via-[#0a0f1a]/30 to-transparent"></div>
+      </>
+    ) : (
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px]">
+        <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#0a0f1a] via-[#0a0f1a]/80 to-[#0a0f1a]/40"></div>
+        <div class="w-full h-full flex flex-col items-center justify-center opacity-30 group-hover:opacity-60 transition-opacity duration-700">
+          <svg class="w-20 h-20 text-slate-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+          </svg>
+          <span class="font-mono text-sm tracking-widest uppercase">System Core</span>
+        </div>
+      </div>
+    )}
+
+    {project.confidential && (
+      <div class="absolute top-6 left-6 z-10">
+        <span class="px-3 py-1.5 bg-amber-500/10 text-amber-500/90 text-xs font-semibold tracking-wider uppercase font-mono rounded-lg border border-amber-500/20 backdrop-blur-md shadow-sm">
+          {t.projects.confidential}
+        </span>
+      </div>
+    )}
+  </div>
+
+  <!-- Contenedor de Texto (Derecha) -->
+  <div class="lg:w-7/12 p-8 lg:p-12 flex flex-col relative z-10">
+    <div class="mb-6">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 font-mono text-xs rounded border border-blue-500/20">{project.role[currentLang]}</span>
+        <span class="text-slate-500 uppercase tracking-widest text-[10px] font-bold">Featured System</span>
+      </div>
+      <h3 class="text-3xl sm:text-4xl font-bold text-slate-100 tracking-tight leading-tight group-hover:text-white transition-colors">
+        {project.name[currentLang]}
+      </h3>
+    </div>
+
+    <p class="text-slate-300/90 leading-relaxed text-lg mb-8">
+      {project.summary[currentLang]}
+    </p>
+
+    <!-- Metrics -->
+    {project.metrics && project.metrics.length > 0 && (
+      <div class="mb-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {project.metrics.map((metric: any) => (
+          <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800/50 shadow-inner">
+            <p class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold mb-2">{metric.label[currentLang]}</p>
+            <p class="text-[17px] font-mono font-medium text-blue-100">{metric.value}</p>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <!-- Highlights -->
+    {project.highlights && project.highlights.length > 0 && (
+      <div class="mb-10">
+        <ul class="space-y-3">
+          {project.highlights.map((highlight: any) => (
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-500 group-hover:bg-blue-400 transition-colors shadow-[0_0_8px_rgba(59,130,246,0.6)]"></span>
+              <span class="text-[15px] text-slate-300/90 group-hover:text-slate-200 transition-colors">{highlight[currentLang]}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <!-- Footer: Stack & Links -->
+    <div class="mt-auto pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+      <div class="flex flex-wrap gap-2">
+        {project.stack.map((tech: string) => (
+          <span class="px-3 py-1.5 bg-slate-800/40 text-slate-300 font-mono text-[11.5px] rounded-md border border-slate-700/50 transition-colors group-hover:bg-slate-800/70 group-hover:border-slate-600/60 hover:text-white">
+            {tech}
+          </span>
+        ))}
+      </div>
+      
+      <div class="flex flex-wrap items-center gap-6 flex-shrink-0">
+        {project.link && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-slate-300 hover:text-white transition-colors text-sm font-semibold group/link"
+          >
+            <svg class="w-4 h-4 text-slate-500 group-hover/link:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+            {t.projects.viewMore}
+          </a>
+        )}
+        
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-slate-300 hover:text-white transition-colors text-sm font-semibold group/github"
+          >
+            <svg class="w-4 h-4 text-slate-500 group-hover/github:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+            </svg>
+            {t.projects.repo || 'GitHub'}
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</article>

@@ -44,7 +44,8 @@ export const translations = {
       stack: 'Stack',
       highlights: 'Logros destacados',
       metrics: 'Métricas',
-      confidential: 'Proyecto confidencial'
+      confidential: 'Proyecto confidencial',
+      inDevelopment: 'En Desarrollo (MVP)'
     },
     skills: {
       title: 'Habilidades Técnicas'
@@ -103,7 +104,8 @@ export const translations = {
       stack: 'Stack',
       highlights: 'Key highlights',
       metrics: 'Metrics',
-      confidential: 'Confidential project'
+      confidential: 'Confidential project',
+      inDevelopment: 'In Development (MVP)'
     },
     skills: {
       title: 'Technical Skills'
@@ -230,8 +232,8 @@ export const projects = [
   {
     id: 1,
     name: {
-      es: 'Sistema POS multiempresa (SaaS / híbrido)',
-      en: 'Multi-company POS System (SaaS / hybrid)'
+      es: 'Sistema POS multiempresa (SaaS / híbrido) - En Desarrollo (MVP)',
+      en: 'Multi-company POS System (SaaS / hybrid) - In Development (MVP)'
     },
     summary: {
       es: 'Plataforma de punto de venta pensada para operación multi-sucursal, multiempresa y control de accesos por roles/permisos.',
@@ -257,22 +259,23 @@ export const projects = [
       }
     ],
     metrics: [
-      {
-        label: { es: 'Tiempo de alta empresa/sucursal', en: 'Company/branch setup time' },
-        value: '~5 min'
-      },
-      {
-        label: { es: 'Roles/permisos definidos', en: 'Roles/permissions defined' },
-        value: '8 roles / 45 permisos'
-      },
-      {
-        label: { es: 'Operación concurrente', en: 'Concurrent operation' },
-        value: '~100 usuarios'
-      }
+      // {
+      //   label: { es: 'Tiempo de alta empresa/sucursal', en: 'Company/branch setup time' },
+      //   value: '~5 min'
+      // },
+      // {
+      //   label: { es: 'Roles/permisos definidos', en: 'Roles/permissions defined' },
+      //   value: '8 roles / 45 permisos'
+      // },
+      // {
+      //   label: { es: 'Operación concurrente', en: 'Concurrent operation' },
+      //   value: '~100 usuarios'
+      // }
     ],
     confidential: false,
     link: null,
-    github: 'https://github.com/carlosramv9/e-commerce-app'
+    github: 'https://github.com/carlosramv9/e-commerce-app',
+    image: '/assets/projects/pos-multitenant.png'
   },
   {
     id: 2,

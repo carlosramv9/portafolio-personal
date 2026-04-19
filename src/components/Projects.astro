@@ -2,6 +2,7 @@
 import type { Language } from "../data/portfolio";
 import { projects } from "../data/portfolio";
 import ProjectCard from "./ProjectCard.astro";
+import HeroProjectCard from "./HeroProjectCard.astro";
 
 interface Props {
   currentLang: Language;
@@ -10,6 +11,10 @@ interface Props {
 
 const { currentLang, translations } = Astro.props;
 const t = translations[currentLang];
+
+// Lógica de separación de proyectos (POS es el Hero Project, id: 1)
+const heroProject = projects.find(p => p.id === 1) || projects[0];
+const secondaryProjects = projects.filter(p => heroProject ? p.id !== heroProject.id : true);
 ---
 
 <section id="projects" class="py-24 relative bg-[#05080f] overflow-hidden">
@@ -25,17 +30,26 @@ const t = translations[currentLang];
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <!-- Section Title -->
-    <div class="mb-20">
+    <div class="mb-16">
       <h2 class="text-4xl font-bold text-white mb-6 uppercase tracking-tight">
         {t.projects.title}
       </h2>
       <div class="w-16 h-1 bg-slate-700"></div>
     </div>
 
-    <!-- Projects Grid -->
+    <!-- Hero Project (Arquitectura Destacada) -->
+    {heroProject && (
+      <HeroProjectCard 
+        project={heroProject} 
+        currentLang={currentLang} 
+        translations={translations} 
+      />
+    )}
+
+    <!-- Secondary Projects Grid -->
     <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
       {
-        projects.map((project) => (
+        secondaryProjects.map((project) => (
           <ProjectCard
             project={project}
             currentLang={currentLang}
