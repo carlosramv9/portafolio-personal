@@ -18,7 +18,8 @@ export const translations = {
     hero: {
       greeting: 'Hola, soy',
       title: 'Ing. Sistemas Computacionales',
-      subtitle: 'Desarrollador Full-Stack | .NET + React/Next.js',
+      // subtitle: 'Desarrollador Full-Stack | .NET + React/Next.js',
+      subtitle: 'Desarrollador Full Stack especializado en sistemas empresariales (ERP, POS, automatización)',
       description: 'Especializado en ERP, portales operativos y soluciones mobile. Construcción de sistemas robustos con enfoque en procesos de negocio y experiencia de usuario.',
       cta: 'Contrátame',
       ctaSecondary: 'Ver Proyectos',
@@ -76,7 +77,8 @@ export const translations = {
     hero: {
       greeting: 'Hi, I\'m',
       title: 'Computer Systems Engineer',
-      subtitle: 'Full-Stack Developer | .NET + React/Next.js',
+      // subtitle: 'Full-Stack Developer | .NET + React/Next.js',
+      subtitle: 'Full-Stack Developer specialized in enterprise systems (ERP, POS, automation)',
       description: 'Specialized in ERP, operational portals, and mobile solutions. Building robust systems with a focus on business processes and user experience.',
       cta: 'Hire Me',
       ctaSecondary: 'View Projects',
