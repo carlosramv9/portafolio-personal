@@ -38,7 +38,8 @@ export const translations = {
     },
     projects: {
       title: 'Proyectos Destacados',
-      viewMore: 'Ver más',
+      viewMore: 'Ver proyecto',
+      repo: 'Repositorio',
       stack: 'Stack',
       highlights: 'Logros destacados',
       metrics: 'Métricas',
@@ -95,7 +96,8 @@ export const translations = {
     },
     projects: {
       title: 'Featured Projects',
-      viewMore: 'View more',
+      viewMore: 'View project',
+      repo: 'Repository',
       stack: 'Stack',
       highlights: 'Key highlights',
       metrics: 'Metrics',
@@ -180,6 +182,50 @@ export const strengths = [
 
 export const projects = [
   {
+    id: 6,
+    name: {
+      es: 'Chatbot de Atención al Cliente con IA Local (n8n + Ollama + Google Docs)',
+      en: 'Local AI Customer Service Chatbot (n8n + Ollama + Google Docs)'
+    },
+    summary: {
+      es: 'Sistema conversacional automatizado que responde preguntas de clientes utilizando documentos empresariales. Ejecución 100% local sin costos de APIs externas.',
+      en: 'Automated conversational system that answers customer queries using business documents. 100% local execution with no external API costs.'
+    },
+    stack: ['n8n', 'Ollama (Local LLM)', 'Google Docs API', 'JavaScript', 'Prompt Engineering'],
+    role: {
+      es: 'Fullstack Developer',
+      en: 'Fullstack Developer'
+    },
+    highlights: [
+      {
+        es: 'Integración de Google Docs como base de conocimiento dinámica para respuestas contextualizadas.',
+        en: 'Integration of Google Docs as a dynamic knowledge base for contextualized responses.'
+      },
+      {
+        es: 'Uso de modelos locales (Ollama) garantizando privacidad y reduciendo costos operativos a cero.',
+        en: 'Use of local models (Ollama) ensuring privacy and reducing operational costs to zero.'
+      },
+      {
+        es: 'Arquitectura en n8n preparada para escalar a un sistema RAG (Retrieval-Augmented Generation) avanzado.',
+        en: 'n8n architecture scalable to an advanced RAG (Retrieval-Augmented Generation) system.'
+      }
+    ],
+    metrics: [
+      {
+        label: { es: 'Costo en llamadas a API', en: 'API call costs' },
+        value: '$0.00'
+      },
+      {
+        label: { es: 'Privacidad de datos', en: 'Data privacy' },
+        value: '100% Local'
+      }
+    ],
+    confidential: false,
+    link: null,
+    github: null,
+    image: '/assets/projects/chatbot-n8n-flow.png'
+  },
+  {
     id: 1,
     name: {
       es: 'Sistema POS multiempresa (SaaS / híbrido)',
@@ -223,7 +269,8 @@ export const projects = [
       }
     ],
     confidential: false,
-    link: null
+    link: null,
+    github: 'https://github.com/carlosramv9/e-commerce-app'
   },
   {
     id: 2,
@@ -406,7 +453,7 @@ export const projects = [
         value: 'API 24-34'
       }
     ],
-    confidential: false,
+    confidential: true,
     link: null
   }
 ];
